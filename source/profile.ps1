@@ -1,0 +1,1 @@
+﻿. 'C:\Users\Cat\OneDrive\Power\Console\profile.main.ps1'
