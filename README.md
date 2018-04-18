@@ -1,6 +1,16 @@
 # power-cat
 My PowerShell profile and scripts.
 
+Only supports Windows.
+
+## Use Profile
+Windows PowerShell and PowerShell Core:
+```PowerShell
+$path = 'your directory path'
+New-Item -Type Directory (Split-Path $PROFILE.CurrentUserAllHosts)
+New-Item -Type SymbolicLink $PROFILE.CurrentUserAllHosts -Value '$path\source\profile.ps1'
+```
+
 ## License
 ```
        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE

@@ -1,4 +1,4 @@
-Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
 RunAsForFile $PSCommandPath
 
 $Name = 'ACDSee Professional 2018'
