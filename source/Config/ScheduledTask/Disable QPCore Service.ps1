@@ -1,16 +1,15 @@
-function ClearGarbage {
+﻿function ClearGarbage {
     taskkill.exe /f /t /im QQProtect.exe
     Set-Service QPCore -StartupType Manual
 }
 
-[int]$maxCount = 0
 [double]$maxWs = 100
 [datetime]$beginTimeWs = Get-Date
 [datetime]$beginTimeNull = Get-Date
 Start-Process 'C:\Program Files (x86)\Tencent\TIM\Bin\QQScLauncher.exe'
 
 while ($true) {
-    Write-Host 'Sleep'
+    Write-Output 'Sleep'
     Start-Sleep 1
 
     $now = Get-Date
@@ -19,23 +18,13 @@ while ($true) {
     if ($process) {
         $beginTimeNull = $now
 
-        # 登录完成检测: 当 Tim 登录窗口退出时
-        if ($process.Length -gt $maxCount) {
-            $maxCount = $process.Length
-        }
-        elseif ($process.Length -lt $maxCount) {
-            ClearGarbage
-            Write-Host 'Clear (count)'
-            break
-        }
-
         # 登录完成检测: 当 Tim 内存保持稳定时
         $currentMax = ($process | Measure-Object -Property WS -Maximum).Maximum / 1mb
 
         if ([System.Math]::Abs($currentMax - $maxWs) -lt 5) {
             if (($now - $beginTimeWs).Seconds -gt 5) {
                 ClearGarbage
-                Write-Host 'Clear (ws)'
+                Write-Output 'Clear (ws)'
                 break
             }
         }
@@ -49,7 +38,7 @@ while ($true) {
         # 异常检测: 当 Tim 进程不存在时
         if (($now - $beginTimeNull).Seconds -gt 5) {
             ClearGarbage
-            Write-Host 'Clear (null)'
+            Write-Output 'Clear (null)'
             break
         }
     }
