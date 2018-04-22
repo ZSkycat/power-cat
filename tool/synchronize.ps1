@@ -11,7 +11,7 @@
 
 Write-Output 'synchronize to directory path:'
 $toPath = (Read-Host '>').TrimEnd('\')
-$formPath = (Get-Item "$PSScriptRoot\source\").FullName.TrimEnd('\')
+$formPath = (Get-Item "$($PSScriptRoot|Split-Path)\source\").FullName.TrimEnd('\')
 Get-ChildItem -Recurse -File $formPath | ForEach-Object {
     $formFile = $_
     $toFilePath = $formFile.FullName.Replace($formPath, $toPath)
