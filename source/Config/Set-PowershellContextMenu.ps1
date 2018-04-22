@@ -1,5 +1,5 @@
-﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
-RunAsForFile $PSCommandPath
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
 $RegShell = 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Microsoft.PowerShellScript.1\Shell'
 $RegDirectory = 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory'
@@ -45,8 +45,8 @@ function DefaultDirectory {
     New-ItemProperty    "$RegDirectory\background\shell\Powershell" -Name 'Extended'
 }
 
-WriteTitle $PSCommandPath
-Write-Host '
+WriteFileTitle
+Write-Output '
 [Open and Runas]
 11: Enable Plus
 12: Default

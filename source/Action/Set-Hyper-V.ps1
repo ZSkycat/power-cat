@@ -1,8 +1,8 @@
-﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
-RunAsForFile $PSCommandPath
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
-WriteTitle $PSCommandPath
-Write-Host '
+WriteFileTitle
+Write-Output '
 Need to restart computer
 1: Enable Hyper-V
 2: Disable Hyper-V

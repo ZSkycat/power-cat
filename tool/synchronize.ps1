@@ -9,19 +9,17 @@
     }
 }
 
-Set-Location $PSScriptRoot
-Write-Host 'synchronize to directory path:'
+Write-Output 'synchronize to directory path:'
 $toPath = (Read-Host '>').TrimEnd('\')
-$formPath = (Get-Item '..\source\').FullName.TrimEnd('\')
-Get-ChildItem -Recurse -File '..\source\' | ForEach-Object {
+$formPath = (Get-Item "$PSScriptRoot\source\").FullName.TrimEnd('\')
+Get-ChildItem -Recurse -File $formPath | ForEach-Object {
     $formFile = $_
     $toFilePath = $formFile.FullName.Replace($formPath, $toPath)
     if (NeedCopy $formFile $toFilePath) {
         $flag = New-Item -Type Directory (Split-Path $toFilePath) -ErrorAction Ignore
         Copy-Item $formFile.FullName $toFilePath
-        if ($flag) { Write-Host "New: $($flag.FullName)" }
-        Write-Host "Copy: $toFilePath"
+        if ($flag) { Write-Output "New: $($flag.FullName)" }
+        Write-Output "Copy: $toFilePath"
     }
-    # 'C:\Users\Cat\Desktop\test'
 }
 Read-Host 'Exit'

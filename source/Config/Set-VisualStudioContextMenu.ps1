@@ -1,5 +1,5 @@
-﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
-RunAsForFile $PSCommandPath
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
 $RegDirectory = 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory'
 $VSPath = '"C:\Program Files (x86)\Common Files\Microsoft Shared\MSEnv\VSLauncher.exe"'
@@ -24,8 +24,8 @@ function AddExtended {
     New-ItemProperty "$RegDirectory\background\shell\AnyCode" -Name 'Extended'
 }
 
-WriteTitle $PSCommandPath
-Write-Host '
+WriteFileTitle
+Write-Output '
 [Open with Visual Studio (Directory, Verb=AnyCode)]
 1: Enable
 2: Enable (Shift)

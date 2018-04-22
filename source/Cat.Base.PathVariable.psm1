@@ -1,12 +1,12 @@
-﻿class PathLikeEnvVar {
+﻿class PathVariable {
     [string]$name
     [System.EnvironmentVariableTarget]$target
     [Collections.Generic.List[String]]$data
 
-    PathLikeEnvVar ([System.EnvironmentVariableTarget]$target) {
+    PathVariable ([System.EnvironmentVariableTarget]$target) {
         $this.Constructor($target, 'Path')
     }
-    PathLikeEnvVar ([System.EnvironmentVariableTarget]$target, [string]$name) {
+    PathVariable ([System.EnvironmentVariableTarget]$target, [string]$name) {
         $this.Constructor($target, $name)
     }
 

@@ -2,8 +2,8 @@
     [string]$NotepadPath = '"E:\Program\Notepad++\notepad++.exe"'
 )
 
-Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
-RunAsForFile $PSCommandPath
+Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
 $RegNotepad = 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\*\shell\Notepad'
 
@@ -17,8 +17,8 @@ function AddMenu {
     New-Item                      $RegNotepad\Command -Value "$NotepadPath `"%1`""
 }
 
-WriteTitle $PSCommandPath
-Write-Host '
+WriteFileTitle
+Write-Output '
 [Open with Notepad++ (Verb=Notepad)]
 1: Enable
 2: Disable

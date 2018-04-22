@@ -3,8 +3,8 @@
     [string[]]$LinkPath
 )
 
-Write-Host $PSCommandPath
-Write-Host '
+Write-Output $PSCommandPath
+Write-Output '
 1: Sync link to start menu
 2: Remove link for start menu
 '
@@ -16,7 +16,7 @@ switch (Read-Host '>') {
         New-Item $MenuPath -ItemType Directory
         $linkItem = Get-ChildItem $LinkPath *.lnk
         $linkItem | ForEach-Object { Copy-Item $_.FullName $MenuPath }
-        Write-Host "Sync $($linkItem.Length) item"
+        Write-Output "Sync $($linkItem.Length) item"
     }
     '2' {
         Remove-Item $MenuPath -Recurse

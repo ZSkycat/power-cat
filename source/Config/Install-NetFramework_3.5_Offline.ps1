@@ -1,5 +1,5 @@
-﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
-RunAsForFile $PSCommandPath
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
 function ParseInput ($path) {
     if ($path -match '^[A-Z]$') {
@@ -17,8 +17,8 @@ function ParseInput ($path) {
     }
 }
 
-WriteTitle $PSCommandPath
-Write-Host '
+WriteFileTitle
+Write-Output '
 Image path: {?:}\sources\sxs
 Package path: {?:\sources\sxs}\microsoft-windows-netfx3-ondemand-package.cab
 '

@@ -1,5 +1,5 @@
-﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
-RunAsForFile $PSCommandPath
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
 $RegDirectory = 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory'
 $VSCPath = '"C:\Program Files\Microsoft VS Code\Code.exe"'
@@ -24,8 +24,8 @@ function AddExtended {
     New-ItemProperty "$RegDirectory\background\shell\VSCode" -Name 'Extended'
 }
 
-WriteTitle $PSCommandPath
-Write-Host '
+WriteFileTitle
+Write-Output '
 [Open with Code (Directory, Verb=VSCode)]
 1: Enable
 2: Enable (Shift)

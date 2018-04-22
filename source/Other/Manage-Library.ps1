@@ -4,8 +4,8 @@
 [string]$LibraryPath = "$env:APPDATA\Microsoft\Windows\Libraries"
 [string[]]$LibraryDefault = 'CameraRoll.library-ms', 'Documents.library-ms', 'Music.library-ms', 'Pictures.library-ms', 'SavedPictures.library-ms', 'Videos.library-ms'
 
-Write-Host $PSCommandPath
-Write-Host '
+Write-Output $PSCommandPath
+Write-Output '
 1: Open directory
 2: Import
 3: Backup
@@ -19,13 +19,13 @@ switch (Read-Host '>') {
     '2' {
         Get-ChildItem $BackupPath *.library-ms | ForEach-Object {
             Copy-Item $_.FullName $LibraryPath
-            Write-Host $_.Name
+            Write-Output $_.Name
         }
     }
     '3' {
         Get-ChildItem $LibraryPath\* *.library-ms -Exclude $LibraryDefault | ForEach-Object {
             Copy-Item $_.FullName $BackupPath
-            Write-Host $_.Name
+            Write-Output $_.Name
         }
     }
     Default { throw 'Error' }

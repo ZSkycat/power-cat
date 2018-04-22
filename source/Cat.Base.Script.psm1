@@ -1,11 +1,10 @@
-using module '.\Cat.PathLikeEnvVar.psm1'
+﻿using module ".\Cat.Base.PathVariable.psm1"
+Import-Module "$PSScriptRoot\Cat.Base.psm1"
 
-function HasNoExit ([string[]]$cmd) {
-    if ($cmd -eq $null) {
-        $cmd = [System.Environment]::GetCommandLineArgs()
-    }
+function HasNoExit ([string[]]$Cmd) {
+    if ($Cmd -eq $null) { $Cmd = [System.Environment]::GetCommandLineArgs() }
     $skip = $false;
-    foreach ($i in $cmd[1..$cmd.Length]) {
+    foreach ($i in $Cmd[1..$Cmd.Length]) {
         if ($skip) {
             $skip = $false
             continue
@@ -21,11 +20,12 @@ function HasNoExit ([string[]]$cmd) {
     return $true
 }
 
-function HasExit ([string[]]$cmd) {
-    return -not (HasNoExit $cmd)
+function HasExit ([string[]]$Cmd) {
+    return -not (HasNoExit $Cmd)
 }
 
 function RunAsForFile ([string]$File) {
+    if ($File.Length -eq 0) { $File = $MyInvocation.PSCommandPath }
     $principal = [System.Security.Principal.WindowsPrincipal][System.Security.Principal.WindowsIdentity]::GetCurrent()
     $isAdministrator = $principal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
     if (!$isAdministrator) {
@@ -36,34 +36,39 @@ function RunAsForFile ([string]$File) {
     }
 }
 
-function WriteTitle ($path) {
-    $title = (Split-Path $path -Leaf) -replace '_', ' ' -replace '.ps1$'
-    Write-Host $title -ForegroundColor Green
+
+function WriteFileTitle ([string]$File) {
+    if ($File.Length -eq 0) { $File = $MyInvocation.PSCommandPath }
+    $title = (Get-Item $File).BaseName -replace '_', ' '
+    WriteOutput $title -ForegroundColor Green
 }
 
-function SetPathEnvVar {
+
+function SetPathVariable {
     param (
         [string[]]$Value,
         [validateSet('Machine', 'User')]
-        [string]$Target
+        [string]$Target,
+        [string]$Name = 'Path'
     )
-    $temp = [PathLikeEnvVar]::new([System.EnvironmentVariableTarget]$Target)
+    $temp = [PathVariable]::new([System.EnvironmentVariableTarget]$Target, $Name)
     $Value | ForEach-Object { $temp.Set($_) }
     $temp.Save() | Out-Null
 }
 
-function RemovePathEnvVar {
+function RemovePathVariable {
     param (
         [string[]]$Value,
         [validateSet('Machine', 'User')]
-        [string]$Target = 'All'
+        [string]$Target = 'All',
+        [string]$Name = 'Path'
     )
     $targets = @($Target)
     if ($Target -eq 'All') {
         $targets = 'Machine', 'User'
     }
     foreach ($i in $targets) {
-        $temp = [PathLikeEnvVar]::new([System.EnvironmentVariableTarget]$i)
+        $temp = [PathVariable]::new([System.EnvironmentVariableTarget]$i, $Name)
         $Value | ForEach-Object { $temp.Remove($_) }
         $temp.Save() | Out-Null
     }

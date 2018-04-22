@@ -1,5 +1,5 @@
-﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
-RunAsForFile $PSCommandPath
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
 $Name = 'ACDSee Professional 2018'
 $NewName = 'ACDSee'
@@ -41,9 +41,8 @@ function GetPath ([int]$index) {
     }
 }
 
-WriteTitle $PSCommandPath
-Write-Host '
-
+WriteFileTitle
+Write-Output '
 A: Enable
 B: Enable (Shift)
 C: Hide

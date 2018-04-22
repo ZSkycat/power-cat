@@ -3,7 +3,8 @@
 )
 
 # Module
-Import-Module "$PSScriptRoot\Cat.Common.psm1"
+Import-Module "$PSScriptRoot\Cat.Cmdlet.psm1"
+Import-Module "$PSScriptRoot\Cat.Cmdlet.Tool.psm1"
 
 # Global Object
 $P = @{}

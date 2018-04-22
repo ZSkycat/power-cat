@@ -1,5 +1,5 @@
-Import-Module "$($PSScriptRoot|Split-Path)\Cat.Script.psm1"
-RunAsForFile $PSCommandPath
+Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
 # Shell handler
 $RegShellPath = @(
@@ -53,8 +53,8 @@ function ShellExDisable ([string]$path) {
     Remove-Item $path
 }
 
-WriteTitle $PSCommandPath
-Write-Host '
+WriteFileTitle
+Write-Output '
 [Shell]
 A: Enable
 B: Enable (Shift)

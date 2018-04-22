@@ -1,8 +1,8 @@
-﻿Write-Host $PSCommandPath
-Write-Host 'Need to restart explorer'
+﻿Write-Output $PSCommandPath
+Write-Output 'Need to restart explorer'
 
 Read-Host '>'
-taskkill.exe /F /IM explorer.exe
+taskkill.exe /f /im explorer.exe
 Start-Sleep 5
 Remove-Item "$env:LOCALAPPDATA\IconCache.db"
 Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\iconcache_*.db"

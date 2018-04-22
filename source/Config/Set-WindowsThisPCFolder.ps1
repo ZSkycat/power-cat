@@ -1,5 +1,5 @@
-﻿Import-Module "$($PSScriptRoot|Split-Path)/Power.Script.psm1"
-RunAsForFile $PSCommandPath
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+RunAsForFile
 
 $RegFolder = 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace'
 $FolderList = @(
@@ -23,8 +23,8 @@ function IsShowFolder ([bool]$isShow, [int]$index) {
     }
 }
 
-WriteTitle $PSCommandPath
-Write-Host '
+WriteFileTitle
+Write-Output '
 +: Show
 -: Hide
 
