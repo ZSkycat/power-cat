@@ -1,4 +1,4 @@
-Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
+﻿Import-Module "$($PSScriptRoot|Split-Path)\Cat.Base.Script.psm1"
 RunAsForFile
 
 # Shell handler
