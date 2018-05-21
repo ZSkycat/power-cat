@@ -21,6 +21,8 @@ switch (Read-Host '>') {
     '2' {
         Remove-Item $MenuPath -Recurse
     }
-    Default { throw 'Error' }
+    Default {
+        Write-Output 'Error'
+    }
 }
 Read-Host 'Exit'

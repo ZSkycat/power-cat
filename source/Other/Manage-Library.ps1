@@ -28,6 +28,8 @@ switch (Read-Host '>') {
             Write-Output $_.Name
         }
     }
-    Default { throw 'Error' }
+    Default {
+        Write-Output 'Error'
+    }
 }
 Read-Host 'Exit'
